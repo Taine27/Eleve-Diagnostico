@@ -27,27 +27,38 @@ export const LEAD_CAPTURE = true;
 export const WHATSAPP_ELEVE = '558494066029';
 
 /**
- * Função responsável pelo envio dos dados de lead.
- * 
- * COMO INTEGRAR:
- * Para enviar os leads para o Google Sheets, CRM, Webhook do n8n ou Make:
- * Substitua o console.log abaixo por uma chamada fetch():
- * 
- * Exemplo:
- * await fetch('https://seu-webhook.com/endpoint', {
- *   method: 'POST',
- *   headers: { 'Content-Type': 'application/json' },
- *   body: JSON.stringify(dados)
- * });
+ * URL do Webhook do Google Apps Script conectado ao Google Planilhas da Eleve
+ */
+export const GOOGLE_SHEETS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzNVJF8F092ssuvuXp5mlZNARj9dmR2SvslWKTm5FxgP6gVhNnViCdV152Dun5vtirgYw/exec';
+
+/**
+ * Função responsável pelo envio dos dados de lead e respostas do quiz para o Google Sheets.
  */
 export async function enviarLead(dados) {
-  console.log('[Eleve Lead Capture] Lead capturado com sucesso:', dados);
+  console.log('[Eleve Lead Capture] Enviando lead para o Google Sheets:', dados);
   
   // Salva localmente para segurança de dados durante a sessão
   try {
     sessionStorage.setItem('eleve_ultimo_lead', JSON.stringify(dados));
   } catch (e) {
     console.warn('Não foi possível salvar no sessionStorage', e);
+  }
+
+  // Envio direto para o Google Apps Script (modo no-cors para evitar bloqueios de redirecionamento)
+  if (GOOGLE_SHEETS_WEBHOOK_URL) {
+    try {
+      await fetch(GOOGLE_SHEETS_WEBHOOK_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8'
+        },
+        body: JSON.stringify(dados)
+      });
+      console.log('[Eleve Lead Capture] Lead enviado com sucesso para a planilha!');
+    } catch (erro) {
+      console.error('[Eleve Lead Capture] Falha ao enviar para a planilha:', erro);
+    }
   }
 }
 
@@ -175,7 +186,8 @@ function submeterLead(event) {
     celular,
     dataEnvio: new Date().toISOString(),
     momento: state.resultado ? state.resultado.perfil.nome : '',
-    pontuacoes: state.resultado ? state.resultado.pontuacoes : null
+    pontuacoes: state.resultado ? state.resultado.pontuacoes : null,
+    respostas: [...state.respostas]
   };
 
   enviarLead(state.lead);

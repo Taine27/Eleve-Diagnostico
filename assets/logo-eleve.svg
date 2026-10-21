@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="100%" height="100%">
+  <defs>
+    <linearGradient id="eleveGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5BB8AB" />
+      <stop offset="100%" stop-color="#4A8597" />
+    </linearGradient>
+  </defs>
+  <!-- Ícone estilizado de elevação/crescimento -->
+  <g transform="translate(10, 10)">
+    <rect x="0" y="36" width="10" height="24" rx="5" fill="#D0D9DC" />
+    <rect x="15" y="24" width="10" height="36" rx="5" fill="#4A8597" />
+    <rect x="30" y="10" width="10" height="50" rx="5" fill="#5BB8AB" />
+    <path d="M2 30 L16 16 L31 2" fill="none" stroke="#3A0952" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <polygon points="31,0 35,6 27,6" fill="#3A0952" />
+  </g>
+  <!-- Nome Eleve -->
+  <text x="65" y="44" font-family="'Montserrat', sans-serif" font-size="34" font-weight="800" fill="#3A0952" letter-spacing="-0.5">eleve</text>
+  <!-- Slogan -->
+  <text x="66" y="60" font-family="'Montserrat', sans-serif" font-size="9.5" font-weight="600" fill="#4A8597" letter-spacing="1.5">SOLUÇÕES EM SAÚDE</text>
+</svg>

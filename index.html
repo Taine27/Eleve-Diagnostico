@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Quiz: Em qual momento de negócio está a sua clínica? | Eleve Soluções em Saúde</title>
+  
+  <!-- Meta tags essenciais -->
+  <meta name="description" content="Descubra em 2 minutos o momento de negócio da sua clínica (Básico bem feito, Bora Vender, Hora de Encantar ou Bora Escalar) com a metodologia da Eleve." />
+  <meta name="theme-color" content="#3A0952" />
+
+  <!-- Open Graph / Redes Sociais / WhatsApp -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Em qual momento de negócio está a sua clínica?" />
+  <meta property="og:description" content="Faça o diagnóstico gratuito e descubra os gargalos e as oportunidades para o crescimento da sua clínica de saúde." />
+  <meta property="og:image" content="./assets/logo-eleve.png" />
+  <meta property="og:locale" content="pt_BR" />
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Quiz: Em qual momento de negócio está a sua clínica?" />
+  <meta name="twitter:description" content="Diagnóstico gratuito em 11 perguntas rápidas pela Eleve Soluções em Saúde." />
+
+  <!-- Google Fonts: Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+
+  <!-- Estilos da aplicação -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Cabeçalho com Logotipo da Eleve -->
+  <header class="header">
+    <div class="header-inner">
+      <a href="." class="logo-container" aria-label="Eleve Soluções em Saúde - Página Inicial">
+        <img 
+          src="./assets/logo-eleve.png" 
+          alt="Eleve Soluções em Saúde" 
+          class="logo-img" 
+          onerror="this.style.display='none'; document.getElementById('logo-fallback').style.display='block';"
+        />
+        <span id="logo-fallback" class="logo-fallback" style="display: none;">
+          <strong>eleve</strong> <span>SOLUÇÕES EM SAÚDE</span>
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Container dinâmico renderizado pelo app.js -->
+  <main id="app" class="container" role="main" aria-live="polite">
+    <div class="loading-state">
+      <div class="spinner"></div>
+      <p>Carregando diagnóstico...</p>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <p>© Eleve Soluções em Saúde • Consultoria em Gestão para Clínicas</p>
+  </footer>
+
+  <!-- Script principal como módulo ES6 -->
+  <script type="module" src="app.js"></script>
+</body>
+</html>

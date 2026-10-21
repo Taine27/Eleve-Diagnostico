@@ -1,0 +1,62 @@
+{
+  "titulo": "Momentos de negócio",
+  "fonte": "suncake.com/surveys/admin?id=561873&section=quizz",
+  "regra": "Para cada resposta, somar os pontos em cada perfil. O perfil com maior total é o resultado.",
+  "perfis": [
+    {
+      "id": "basico",
+      "nome": "Básico bem feito",
+      "descricao": "Sua clínica está no Básico Bem Feito: Nesta fase inicial, o foco está em organizar e estruturar os processos da clínica. Isso inclui eliminar desperdícios, melhorar o engajamento da equipe, padronizar atividades e criar uma base sólida para o crescimento sustentável."
+    },
+    {
+      "id": "vender",
+      "nome": "Bora Vender",
+      "descricao": "Sua clínica está no momento - Bora Vender: Com a estrutura organizada, o segundo momento é voltado para o crescimento do faturamento. Aqui, as ações são direcionadas para o marketing e o fortalecimento da equipe de vendas, com o objetivo de atrair mais pacientes e melhorar a conversão."
+    },
+    {
+      "id": "encantar",
+      "nome": "Hora de Encantar",
+      "descricao": "Sua clínica está no momento - Hora de Encantar: Depois de estabelecer um bom fluxo de vendas, a prioridade passa a ser a experiência do cliente. Nesta fase, são implementadas estratégias para fidelizar pacientes, oferecendo atendimentos diferenciados e experiências únicas que destacam a clínica no mercado."
+    },
+    {
+      "id": "escalar",
+      "nome": "Bora Escalar",
+      "descricao": "Sua clínica está no momento - Bora Escalar: Com um negócio sólido e uma boa base de clientes, chega o momento de pensar na expansão. Aqui, são avaliadas oportunidades para crescimento estratégico, como abertura de novas unidades, criação de novos setores e fortalecimento da marca."
+    }
+  ],
+  "perguntas": [
+    { "n": 1,  "texto": "Sua clínica possui objetivos e metas definidos?",
+      "respostas": { "Sim": { "basico": -1, "vender": 2,  "encantar": 2,  "escalar": 2 },
+                     "Não": { "basico": 2,  "vender": -1, "encantar": -1, "escalar": -1 } } },
+    { "n": 2,  "texto": "Sua clínica possui processos e rotinas definidos?",
+      "respostas": { "Sim": { "basico": -1, "vender": -1, "encantar": 0,  "escalar": 0 },
+                     "Não": { "basico": 3,  "vender": -1, "encantar": -2, "escalar": -3 } } },
+    { "n": 3,  "texto": "O seu time segue os processos definidos, e exercem o cargo de forma orientada?",
+      "respostas": { "Sim": { "basico": 0, "vender": 2, "encantar": 1, "escalar": 1 },
+                     "Não": { "basico": 4, "vender": 0, "encantar": 0, "escalar": 0 } } },
+    { "n": 4,  "texto": "Os pacientes costumam procurar sua clínica como primeira opção?",
+      "respostas": { "Sim": { "basico": 0, "vender": 2, "encantar": 3, "escalar": 2 },
+                     "Não": { "basico": 4, "vender": 0, "encantar": 0, "escalar": 0 } } },
+    { "n": 5,  "texto": "As estratégias comerciais da sua clínica, funcionam de forma correta?",
+      "respostas": { "Sim": { "basico": 0, "vender": 3, "encantar": 2, "escalar": 2 },
+                     "Não": { "basico": 4, "vender": 0, "encantar": 0, "escalar": 0 } } },
+    { "n": 6,  "texto": "Sua clínica possui sistemas para chamadas e WhatsApp?",
+      "respostas": { "Sim": { "basico": -2, "vender": 2, "encantar": 2, "escalar": 2 },
+                     "Não": { "basico": 4,  "vender": 0, "encantar": 0, "escalar": 0 } } },
+    { "n": 7,  "texto": "Sua clínica possui sistema de gestão de agenda e prontuários de forma efetiva?",
+      "respostas": { "Sim": { "basico": -1, "vender": 3, "encantar": 2, "escalar": 2 },
+                     "Não": { "basico": 3,  "vender": 0, "encantar": 0, "escalar": 0 } } },
+    { "n": 8,  "texto": "Seu time de colaboradores estão alinhados com o objetivo da clínica?",
+      "respostas": { "Sim": { "basico": 0, "vender": 1, "encantar": 2, "escalar": 2 },
+                     "Não": { "basico": 2, "vender": 0, "encantar": 0, "escalar": 0 } } },
+    { "n": 9,  "texto": "Sua clínica possui boa saúde financeira?",
+      "respostas": { "Sim": { "basico": 0, "vender": 0, "encantar": 2, "escalar": 3 },
+                     "Não": { "basico": 3, "vender": 3, "encantar": 0, "escalar": 0 } } },
+    { "n": 10, "texto": "Você possui um marketing efetivo, com campanhas e presença digital de forma estratégica?",
+      "respostas": { "Sim": { "basico": 0, "vender": 2, "encantar": 2, "escalar": 1 },
+                     "Não": { "basico": 3, "vender": 0, "encantar": 0, "escalar": 0 } } },
+    { "n": 11, "texto": "Você possui indicadores para os setores da clínica, e para gerenciamento da operação?",
+      "respostas": { "Sim": { "basico": 0, "vender": 0, "encantar": 1, "escalar": 1 },
+                     "Não": { "basico": 1, "vender": 0, "encantar": 0, "escalar": 0 } } }
+  ]
+}

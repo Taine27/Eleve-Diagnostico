@@ -27,15 +27,15 @@ export const LEAD_CAPTURE = true;
 export const WHATSAPP_ELEVE = '558494066029';
 
 /**
- * URL do Webhook do Google Apps Script conectado ao Google Planilhas da Eleve
+ * Integração direta com a planilha Google Sheets via SheetDB API
  */
-export const GOOGLE_SHEETS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbzNVJF8F092ssuvuXp5mlZNARj9dmR2SvslWKTm5FxgP6gVhNnViCdV152Dun5vtirgYw/exec';
+export const SHEETDB_URL = 'https://sheetdb.io/api/v1/sob3dgcv3kvfv';
 
 /**
- * Função responsável pelo envio dos dados de lead e respostas do quiz para o Google Sheets.
+ * Função responsável pelo envio dos dados de lead e respostas do quiz para a planilha.
  */
 export async function enviarLead(dados) {
-  console.log('[Eleve Lead Capture] Enviando lead para o Google Sheets:', dados);
+  console.log('[Eleve Lead Capture] Enviando lead para a planilha:', dados);
   
   // Salva localmente para segurança de dados durante a sessão
   try {
@@ -44,21 +44,35 @@ export async function enviarLead(dados) {
     console.warn('Não foi possível salvar no sessionStorage', e);
   }
 
-  // Envio direto para o Google Apps Script (modo no-cors para evitar bloqueios de redirecionamento)
-  if (GOOGLE_SHEETS_WEBHOOK_URL) {
-    try {
-      await fetch(GOOGLE_SHEETS_WEBHOOK_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-          'Content-Type': 'text/plain;charset=utf-8'
-        },
-        body: JSON.stringify(dados)
-      });
-      console.log('[Eleve Lead Capture] Lead enviado com sucesso para a planilha!');
-    } catch (erro) {
-      console.error('[Eleve Lead Capture] Falha ao enviar para a planilha:', erro);
-    }
+  // Mapeia os dados exatamente com os nomes das colunas da planilha da Eleve
+  const linha = {
+    'Data e Hora': new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' }),
+    'Nome': dados.nome || '',
+    'Clínica / Especialidade': dados.clinicaEspecialidade || '',
+    'WhatsApp': dados.celular || '',
+    'Momento do Negócio': dados.momento || ''
+  };
+
+  // Mapeia as 11 respostas (P1 a P11)
+  if (dados.respostas && Array.isArray(dados.respostas)) {
+    dados.respostas.forEach((resposta, index) => {
+      linha[`P${index + 1}`] = resposta;
+    });
+  }
+
+  // Disparo com CORS liberado e confirmação instantânea
+  try {
+    const resposta = await fetch(SHEETDB_URL, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ data: [linha] })
+    });
+    console.log('[Eleve Lead Capture] Lead gravado na planilha com sucesso! Status:', resposta.status);
+  } catch (erro) {
+    console.error('[Eleve Lead Capture] Falha ao gravar na planilha:', erro);
   }
 }
 

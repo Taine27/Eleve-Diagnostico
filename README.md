@@ -68,18 +68,29 @@ No arquivo `app.js`:
 export const WHATSAPP_ELEVE = '558494066029'; // +55 84 9406-6029
 ```
 
-### 4. Integrar com Google Sheets, Webhook n8n, Make ou CRM
-No arquivo `app.js`, a função `enviarLead(dados)` já está estruturada:
+### 3. Integração com o Google Planilhas
+O quiz já está conectado com o Google Sheets via Google Apps Script na constante:
 ```javascript
-export async function enviarLead(dados) {
-  // Exemplo de integração com webhook:
-  // await fetch('https://seu-webhook.com/lead', {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json' },
-  //   body: JSON.stringify(dados)
-  // });
-}
+export const GOOGLE_SHEETS_WEBHOOK_URL = 'https://script.google.com/macros/s/.../exec';
 ```
+Cada lead preenchido e suas respostas individuais (P1 a P11) são gravados automaticamente em uma nova linha da planilha.
+
+### 4. Alterar o Número de WhatsApp da Eleve
+No arquivo `app.js`:
+```javascript
+// Formato internacional sem caracteres especiais: DDI (55) + DDD + Número
+export const WHATSAPP_ELEVE = '558494066029'; // +55 84 9406-6029
+```
+
+---
+
+## 🤖 Deploy Contínuo Automático (CI/CD)
+
+O projeto possui um workflow configurado no GitHub Actions (`.github/workflows/deploy.yml`). 
+Sempre que um novo commit é enviado para a branch `main`:
+1. O GitHub conecta-se ao servidor VPS via SSH pela porta `22022`.
+2. Executa `git pull origin main` no diretório de produção (`/var/www/eleve-diagnostico`).
+3. As alterações entram no ar imediatamente em **https://quiz.elevesolucoes.com.br** sem necessidade de comandos manuais no terminal.
 
 ---
 

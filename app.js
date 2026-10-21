@@ -168,9 +168,10 @@ function finalizarPerguntas() {
   renderizar();
 }
 
-function submeterLead(event) {
+async function submeterLead(event) {
   event.preventDefault();
   const form = event.target;
+  const botao = form.querySelector('button[type="submit"]');
   const nome = form.nome.value.trim();
   const clinica = form.clinica.value.trim();
   const celular = form.celular.value.trim();
@@ -178,6 +179,11 @@ function submeterLead(event) {
   if (!nome || !clinica || celular.replace(/\D/g, '').length < 10) {
     mostrarToast('Por favor, preencha todos os campos corretamente para continuar.');
     return;
+  }
+
+  if (botao) {
+    botao.disabled = true;
+    botao.textContent = 'Gerando diagnóstico...';
   }
 
   state.lead = {
@@ -190,7 +196,11 @@ function submeterLead(event) {
     respostas: [...state.respostas]
   };
 
-  enviarLead(state.lead);
+  try {
+    await enviarLead(state.lead);
+  } catch (err) {
+    console.error('Erro ao submeter lead:', err);
+  }
 
   state.etapaAtual = 'resultado';
   renderizar();
